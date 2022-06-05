@@ -1,0 +1,33 @@
+<template name='showsUpdate'>
+  {{#Layout template=materializeHeader}}
+    {{collection.title}}
+  {{/Layout}}
+  {{#Layout template=materializeContent}}
+    {{#if Template.subscriptionsReady}}
+      {{#autoForm collection=collection doc=item id="updateShowForm" type="update"}}
+        {{> afQuickField name="showName"}}
+        {{> afQuickField name="showId"}}
+        {{> afQuickField name="host"}}
+        {{> afQuickField name="startDay"}}
+        {{> afQuickField name="startHour"}}
+        {{> afQuickField name="startMinute"}}
+        {{> afQuickField name="endDay"}}
+        {{> afQuickField name="endHour"}}
+        {{> afQuickField name="endMinute"}}
+        {{> afQuickField name="genres"}}
+        {{> afQuickField name="synopsis"}}
+        {{> afFieldInput name="body"}}
+        {{> afQuickField name="active"}}
+        {{> afFieldInput name="featuredImage"}}
+        {{> afQuickField name="latestEpisodeUrl"}}
+      {{/autoForm}}
+    {{/if}}
+  {{/Layout}}
+  {{# Layout template=materializeButtons }}
+      <a href="{{ collection.indexPath }}" class="waves-effect waves-light btn {{ orion_autoformLoading }}">{{ i18n 'global.cancel' }}</a>
+      {{#if item.canShowRemove }}
+        <a class="waves-effect waves-light btn red {{ orion_autoformLoading }}" href="{{ collection.deletePath item._id }}">{{ i18n 'global.delete' }}</a>
+      {{/if }}
+      <a class="waves-effect waves-light btn light-blue accent-4 save-btn {{ orion_autoformLoading }}" href="#">{{ i18n 'global.save' }}</a>
+  {{/ Layout }}
+</template>
