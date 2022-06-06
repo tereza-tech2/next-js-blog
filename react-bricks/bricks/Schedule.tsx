@@ -1,8 +1,10 @@
+import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
 import { Stage, Talk } from '../types';
 import styles from './schedule.module.css';
 import TalkCard from './TalkCard';
 import { types, Text, RichText, Image } from 'react-bricks/frontend'
+import { getAllStages } from '../../api/dato-cms'
 
 interface  StageProps {
     stage: Stage;
@@ -43,26 +45,36 @@ StageRow.schema = {
     sideEditProps: [
     ],
     getDefaultProps: () => ({
-        stage: 'A60xWr-nqv0'
+        stage: getAllStages()
       }),
   }
 
 const Schedule: types.Brick<ScheduleProps> = ({ allStages }) => {
-  return (
-    <div className={styles.container}>
+    const [data, updateData] = useState<Stage[] | null>(null);
+    useEffect(() => {
+        const getData = async () => {
+          const resp = await getAllStages()
+          updateData(resp);
+        }
+        getData();
+      }, []);
+   // console.log(allStages)
+    return data && <div className={styles.container}>
       <div className={styles['row-wrapper']}>
-        {allStages.map(stage => (
+        {data.map(stage => (
           <StageRow key={stage.slug} stage={stage} />
         ))}
       </div>
     </div>
-  );
+  
 }
 Schedule.schema = {
     name: 'schedule',
     label: 'Schedule',
     category: 'streaming',
-    getDefaultProps: () => ({}),
+    getDefaultProps: () => ({
+        allStages: getAllStages()
+    }),
     sideEditProps: [
     ],
   }
