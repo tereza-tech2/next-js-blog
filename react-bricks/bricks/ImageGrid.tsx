@@ -41,6 +41,7 @@ const Brick = (props) => {
         marginBottom: `${gap}px`,
       }}
     >
+      Image Grid
       <img
         src={imgSrc}
         alt=""

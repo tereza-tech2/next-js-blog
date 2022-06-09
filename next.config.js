@@ -4,4 +4,7 @@ module.exports = {
     defaultLocale: 'en',
     localeDetection: false,
   },
+  images: {
+    domains: ['www.datocms-assets.com'],
+  },
 }

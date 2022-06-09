@@ -10,6 +10,11 @@ import VideoRow from './VideoRow'
 import TeamRound from './TeamRound'
 import { Schedule, StageRow } from './Schedule'
 //import  from './ImageGrid'
+import AddSchedule from './AddSchedule'
+import BlockSchedule from './BlockSchedule'
+import NewBlock from './NewBlock'
+import NewBlocker from './NewBlocker'
+import NewCard from './NewCard'
 
 const bricks: types.Brick<any>[] = [
   ...website, // React Bricks UI
@@ -22,7 +27,12 @@ const bricks: types.Brick<any>[] = [
   VideoRow,
   TeamRound,
   Schedule,
-  StageRow
+  StageRow,
+  AddSchedule,
+  BlockSchedule,
+  NewBlock,
+  NewBlocker,
+  NewCard
   
   // Example custom brick
   // Put here your other bricks...
