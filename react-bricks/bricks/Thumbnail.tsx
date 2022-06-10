@@ -4,11 +4,13 @@ import { types, Text, RichText, Image } from 'react-bricks/frontend'
 
 interface ThumbnailProps {
     hasShadow: boolean
+    fontSize: number
     bgColor: types.IColor
 }
 
 const Thumbnail: types.Brick<ThumbnailProps> = ({
     hasShadow,
+    fontSize,
     bgColor,
     ...rest
   }) => {
@@ -17,7 +19,7 @@ const Thumbnail: types.Brick<ThumbnailProps> = ({
         {...rest}
         className={`my-6 p-6 text-center border rounded-lg ${
           hasShadow ? 'shadow-xl' : ''
-        } ${bgColor.className}`}
+        } ${bgColor.className} text-[${fontSize}px]`}
       >
             <Image
                 propName="image"
@@ -28,7 +30,7 @@ const Thumbnail: types.Brick<ThumbnailProps> = ({
             <Text
                 propName="title"
                 renderBlock={({ children }) => (
-                    <h1 className="text-2xl font-bold">{children}</h1>
+                    <h1 className={`text-[${fontSize}px]`}>{children}</h1>
                 )}
                 placeholder="Type a title..."
             />
@@ -59,14 +61,14 @@ Thumbnail.schema = {
         title: 'Hello, world!',
         description: 'Lorem ipsum dolor sit amet.',
         hasShadow: true,
-        bgColor: { color: '#ffffff', className: 'bg-white' }
+        bgColor: { color: '#ffffff', className: 'bg-white' },
+        fontSize: '16px'
     }),
     sideEditProps: [
         {
             name: 'fontSize',
             label: 'Font Size',
-            type: types.SideEditPropType.Number,
-            validate: value => value >= 12 && value <= 32
+            type: types.SideEditPropType.Number
         },
         {
             name: 'hasShadow',

@@ -31,6 +31,7 @@
     "react-bricks-ui": "^0.4.1",
     "react-dom": "^18.1.0",
     "react-draggable": "^4.4.4",
+    "react-iconly": "^2.2.5",
     "react-imask": "^6.2.2",
     "react-number-format": "^4.7.3",
     "react-router-dom": "^5.3.0",

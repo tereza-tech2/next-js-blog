@@ -31,11 +31,24 @@ interface CardScheduleProps {
     bgColor: types.IColor
 }
 
+interface CProps {
+  key: string;
+  talk: Talk;
+  showTime: boolean;
+}
+
 type CardProps = {
   key: string;
   talk: Talk;
   showTime: boolean;
 };
+
+type styls = {
+  fontSize: number;
+  bgColor: types.IColor;
+};
+
+type CardStyled = CardProps & styls
 
 const formatDate = (date: string) => {
   // https://github.com/date-fns/date-fns/issues/946
@@ -43,10 +56,12 @@ const formatDate = (date: string) => {
 };
 
 
-const NewCard: types.Brick<CardProps> = ({
+const NewCard: types.Brick<CardStyled> = ({
     key,
     talk,
     showTime,
+    fontSize,
+    bgColor,
     ...rest
   }) => {
     const [data, updateData] = useState<OneSchedule | null>(null);
@@ -64,7 +79,7 @@ const NewCard: types.Brick<CardProps> = ({
 
 
       return data &&  (
-        <div key={talk.title} className={styles.talk}>
+        <div key={talk.title} className={styles.talk + ' ' + bgColor.className + ' text-blue-600'}>
         {showTime && <p className={styles.time}>{startAndEndTime || <>&nbsp;</>}</p>}
         <Link href={firstSpeakerLink}>
           <a
@@ -73,7 +88,7 @@ const NewCard: types.Brick<CardProps> = ({
             })}
           >
             <div className={styles['card-body']}>
-              <h4 title={talk.title} className={styles.title}>
+              <h4 title={talk.title} className={`text-[${fontSize}px]`}>
                 {talk.title}
               </h4>
               <div className={styles.speaker}>
@@ -126,7 +141,9 @@ NewCard.schema = {
           imageSquare: {url: 'https://www.datocms-assets.com/73703/1654116743-avataaars.png?fit=crop&fm=jpg&h=120&w=120', blurDataURL: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…1Kab1qcUXcjZVjdCUqVCqQJzprURKAZ/AH13PyIN613P/2Q=='}
           }]
         },
-        showTime: 0
+        showTime: 0,
+        bgColor: { color: '#ffffff', className: 'bg-white' },
+        fontSize: '16px'
       
     }),
     sideEditProps: [
@@ -152,7 +169,25 @@ NewCard.schema = {
                   return [{value:1, label:'Option 1'},{value:2, label:'Option 2'}]
                 }
               }
-        }
+        },
+        {
+          name: 'bgColor',
+          label: 'Background',
+          type: types.SideEditPropType.Select,
+          selectOptions: {
+              display: types.OptionsDisplay.Color,
+              options: [
+                  {
+                      label: 'White',
+                      value: { color: '#ffffff', className: 'bg-white' },
+                  },
+                  {
+                      label: 'Light blue',
+                      value: { color: '#eff6ff', className: 'bg-blue-50' },
+                  },
+              ],
+          },
+      }
     ],
 }
 

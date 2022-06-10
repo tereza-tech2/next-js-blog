@@ -10,6 +10,7 @@ enum blockNames {
     FeatureItem = 'feature-item',
   Features = 'features',
   HeroUnit = 'hero-unit',
+  HeroTexts = 'hero-texts',
   Separator = 'separator',
   Testimonial = 'testimonial',
   TextImage = 'text-image',

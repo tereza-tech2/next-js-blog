@@ -21,7 +21,6 @@
   }
   
   .stage-name {
-    font-size: 22px;
     color: #fff;
     line-height: 1.15;
     letter-spacing: -0.05em;
@@ -62,7 +61,6 @@
     }
   
     .stage-name {
-      font-size: var(--space-8x);
       position: sticky;
       left: 0;
       padding-left: var(--space-8x);
